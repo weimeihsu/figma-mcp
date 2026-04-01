@@ -366,7 +366,7 @@
     }
 
     .card {
-      background: #fff;
+      background: #374151;
       border-radius: var(--radius-m);
       overflow: hidden;
       box-shadow: var(--shadow-card);
@@ -397,12 +397,9 @@
     }
 
     /* Card media gradient overlays */
-    .card--savings .card__media { background: linear-gradient(135deg, #d4e8f2 0%, #b8d4e8 100%); }
-    .card--transfers .card__media { background: linear-gradient(135deg, #d4e8df 0%, #b8d4c8 100%); }
-    .card--fraud .card__media { background: linear-gradient(135deg, #e8ddf0 0%, #d4c8e8 100%); }
-    .card--savings .card__media-icon { color: #2b6cb0; opacity: 0.5; }
-    .card--transfers .card__media-icon { color: #276749; opacity: 0.5; }
-    .card--fraud .card__media-icon { color: #553c9a; opacity: 0.5; }
+    .card--savings .card__media { background: linear-gradient(149deg, #d4e8f2 0%, #b8d4e8 100%); }
+    .card--transfers .card__media { background: linear-gradient(149deg, #d4e8df 0%, #b8d4c8 100%); }
+    .card--fraud .card__media { background: linear-gradient(149deg, #e8ddf0 0%, #d4c8e8 100%); }
 
     .card__body {
       padding: 20px;
@@ -416,21 +413,21 @@
       font-family: var(--font-body);
       font-size: 18px;
       font-weight: 700;
-      color: var(--gray-900);
+      color: #ffffff;
       line-height: 1.4;
     }
 
     .card__text {
       font-size: 15px;
       font-weight: 400;
-      color: var(--gray-900);
+      color: #ffffff;
       line-height: 1.6;
       flex: 1;
     }
 
     .card__tag {
       font-size: 13px;
-      color: var(--gray-400);
+      color: #ffffff;
       margin-top: 6px;
     }
 
@@ -792,12 +789,7 @@
         <!-- Card 1 -->
         <div class="card card--savings">
           <div class="card__media">
-            <svg class="card__media-icon" viewBox="0 0 56 56" fill="none">
-              <rect x="8" y="20" width="40" height="28" rx="4" stroke="currentColor" stroke-width="2"/>
-              <path d="M18 20V16C18 11.58 22.48 8 28 8C33.52 8 38 11.58 38 16V20" stroke="currentColor" stroke-width="2"/>
-              <path d="M28 34V38M28 30V34" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              <circle cx="28" cy="34" r="4" stroke="currentColor" stroke-width="2"/>
-            </svg>
+            <img class="card__media-icon" src="https://www.figma.com/api/mcp/asset/504c0632-4ad0-4e77-a1d4-1db028727b18" alt="Savings icon" />
           </div>
           <div class="card__body">
             <h3 class="card__title">Smart Savings Accounts</h3>
@@ -809,11 +801,7 @@
         <!-- Card 2 -->
         <div class="card card--transfers">
           <div class="card__media">
-            <svg class="card__media-icon" viewBox="0 0 56 56" fill="none">
-              <circle cx="28" cy="28" r="20" stroke="currentColor" stroke-width="2"/>
-              <path d="M12 28H44M12 28C12 28 20 22 28 22M12 28C12 28 20 34 28 34M44 28C44 28 36 22 28 22M44 28C44 28 36 34 28 34" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M28 8V48" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3"/>
-            </svg>
+            <img class="card__media-icon" src="https://www.figma.com/api/mcp/asset/21f29c87-f0f3-49f8-b0ec-9b4486f082cc" alt="Transfers icon" />
           </div>
           <div class="card__body">
             <h3 class="card__title">Zero-Fee Global Transfers</h3>
@@ -825,10 +813,7 @@
         <!-- Card 3 -->
         <div class="card card--fraud">
           <div class="card__media">
-            <svg class="card__media-icon" viewBox="0 0 56 56" fill="none">
-              <path d="M28 8L42 14V28C42 36.84 35.84 45.08 28 48C20.16 45.08 14 36.84 14 28V14L28 8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-              <path d="M22 28L26 32L34 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <img class="card__media-icon" src="https://www.figma.com/api/mcp/asset/daec6226-fbe1-491e-b38f-f808de2560b5" alt="Fraud protection icon" />
           </div>
           <div class="card__body">
             <h3 class="card__title">Advanced Fraud Protection</h3>
