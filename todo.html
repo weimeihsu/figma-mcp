@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Tasks</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f3f4f6;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 60px 20px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      padding: 32px;
+      width: 700px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* Header */
+    .header { display: flex; flex-direction: column; gap: 8px; }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #9ca3af;
+      font-size: 14px;
+      font-weight: 400;
+    }
+    .header-date { font-size: 13px; }
+    .header-title { font-size: 32px; font-weight: 700; color: #111827; }
+    .header-sub { font-size: 14px; color: #9ca3af; font-weight: 400; }
+
+    /* Tab Bar */
+    .tab-bar { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .tab {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1px solid #e5e7eb;
+      font-size: 14px;
+      font-weight: 500;
+      color: #111827;
+      cursor: pointer;
+      background: transparent;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+      user-select: none;
+    }
+    .tab.active {
+      background: #111827;
+      color: #fff;
+      border-color: #111827;
+    }
+    .tab-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* Add Task Row */
+    .add-task-row { display: flex; gap: 12px; align-items: center; }
+    .input-field {
+      flex: 1;
+      border: 1px dashed #e5e7eb;
+      border-radius: 8px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+      color: #6b7280;
+      font-weight: 500;
+      cursor: text;
+      transition: border-color 0.15s;
+    }
+    .input-field:focus-within { border-color: #9ca3af; }
+    .input-field-left { display: flex; gap: 8px; align-items: center; flex: 1; }
+    .input-field input {
+      border: none;
+      outline: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #111827;
+      background: transparent;
+      width: 100%;
+    }
+    .input-field input::placeholder { color: #6b7280; }
+    .input-shortcut { font-size: 14px; color: #6b7280; white-space: nowrap; flex-shrink: 0; }
+    .plus-icon { color: #6b7280; font-size: 16px; flex-shrink: 0; }
+
+    /* Category select */
+    .category-select {
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: #6b7280;
+      background: #fff;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .add-btn {
+      background: #111827;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s;
+    }
+    .add-btn:hover { background: #1f2937; }
+
+    /* Section */
+    .section { display: flex; flex-direction: column; gap: 8px; }
+    .section-header { display: flex; gap: 8px; align-items: center; }
+    .section-title { font-size: 16px; font-weight: 600; color: #111827; }
+    .section-title.completed { color: #9ca3af; }
+    .count-badge {
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .count-badge.todo { background: #dbeafe; color: #1e40af; }
+    .count-badge.done { background: #f3f4f6; color: #9ca3af; }
+
+    /* Task Item */
+    .task-item {
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 1px 13px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.15s;
+    }
+    .task-item.completed { background: #f3f4f6; }
+    .task-item:hover { background: #f9fafb; }
+    .task-item.completed:hover { background: #f3f4f6; }
+    .task-left { display: flex; gap: 12px; align-items: center; }
+
+    .checkbox {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      flex-shrink: 0;
+      cursor: pointer;
+      border: 1px solid #e5e7eb;
+      background: #f3f4f6;
+      transition: background 0.15s, border-color 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .checkbox.checked {
+      background: #111827;
+      border-color: #111827;
+    }
+    .checkbox svg { display: none; }
+    .checkbox.checked svg { display: block; }
+
+    .task-text {
+      font-size: 14px;
+      font-weight: 500;
+      color: #111827;
+      white-space: nowrap;
+    }
+    .task-text.strikethrough {
+      text-decoration: line-through;
+      color: #6b7280;
+    }
+
+    /* Tag */
+    .tag {
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      border: 1px solid;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .tag-work    { background: #dbeafe; border-color: #3b82f6; color: #1e40af; }
+    .tag-personal{ background: #dcfce7; border-color: #22c55e; color: #166534; }
+    .tag-health  { background: #fee2e2; border-color: #dc2626; color: #7f1d1d; }
+    .tag-learning{ background: #f3e8ff; border-color: #a855f7; color: #6b21a8; }
+
+    /* Divider */
+    .divider { height: 1px; background: #e5e7eb; width: 100%; }
+
+    /* Empty state */
+    .empty { color: #9ca3af; font-size: 14px; text-align: center; padding: 12px; }
+  </style>
+</head>
+<body>
+<div class="card">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-top">
+      <span id="greeting">Good morning 👋</span>
+      <span class="header-date" id="today-date"></span>
+    </div>
+    <div class="header-title">My Tasks</div>
+    <div class="header-sub" id="tasks-remaining">5 tasks remaining</div>
+  </div>
+
+  <!-- Tab Bar -->
+  <div class="tab-bar" id="tab-bar">
+    <button class="tab active" data-filter="all">All</button>
+    <button class="tab" data-filter="work">
+      <span class="tab-dot" style="background:#3b82f6"></span>Work
+    </button>
+    <button class="tab" data-filter="personal">
+      <span class="tab-dot" style="background:#22c55e"></span>Personal
+    </button>
+    <button class="tab" data-filter="health">
+      <span class="tab-dot" style="background:#dc2626"></span>Health
+    </button>
+    <button class="tab" data-filter="learning">
+      <span class="tab-dot" style="background:#a855f7"></span>Learning
+    </button>
+  </div>
+
+  <!-- Add Task Row -->
+  <div class="add-task-row">
+    <div class="input-field">
+      <div class="input-field-left">
+        <span class="plus-icon">+</span>
+        <input type="text" id="task-input" placeholder="Add a task..." />
+      </div>
+      <select class="category-select" id="category-select">
+        <option value="work">Work</option>
+        <option value="personal">Personal</option>
+        <option value="health">Health</option>
+        <option value="learning">Learning</option>
+      </select>
+      <span class="input-shortcut" style="margin-left:8px">⌘N</span>
+    </div>
+    <button class="add-btn" id="add-btn">Add Task</button>
+  </div>
+
+  <!-- To Do Section -->
+  <div class="section" id="todo-section">
+    <div class="section-header">
+      <span class="section-title">To Do</span>
+      <span class="count-badge todo" id="todo-count">5</span>
+    </div>
+    <div id="todo-list"></div>
+  </div>
+
+  <!-- Divider -->
+  <div class="divider"></div>
+
+  <!-- Completed Section -->
+  <div class="section" id="completed-section">
+    <div class="section-header">
+      <span class="section-title completed">Completed</span>
+      <span class="count-badge done" id="done-count">3</span>
+    </div>
+    <div id="done-list"></div>
+  </div>
+
+</div>
+
+<script>
+  // ── Data ──────────────────────────────────────────────────────────────────
+  let nextId = 9;
+  let tasks = [
+    { id: 1, text: 'Finish Auth Design',        category: 'work',     done: false },
+    { id: 2, text: 'Buy groceries for dinner',   category: 'personal', done: false },
+    { id: 3, text: 'Morning yoga session',       category: 'health',   done: false },
+    { id: 4, text: 'Read Chapter 3 of Clean Code', category: 'learning', done: false },
+    { id: 5, text: 'Review pull requests',       category: 'work',     done: false },
+    { id: 6, text: 'Set up project repo',        category: 'work',     done: true  },
+    { id: 7, text: '30 min walk outside',        category: 'health',   done: true  },
+    { id: 8, text: 'Watch Figma tutorial',       category: 'learning', done: true  },
+  ];
+
+  let activeFilter = 'all';
+
+  // ── Date & Greeting ───────────────────────────────────────────────────────
+  function initHeader() {
+    const now = new Date();
+    const h = now.getHours();
+    const greeting = h < 12 ? 'Good morning 👋' : h < 18 ? 'Good afternoon 👋' : 'Good evening 👋';
+    document.getElementById('greeting').textContent = greeting;
+    document.getElementById('today-date').textContent = now.toLocaleDateString('en-US', {
+      weekday: 'long', month: 'long', day: 'numeric'
+    });
+  }
+
+  // ── Tag HTML ──────────────────────────────────────────────────────────────
+  const categoryLabels = {
+    work: 'Work', personal: 'Personal', health: 'Health', learning: 'Learning'
+  };
+
+  function tagHTML(category) {
+    return `<span class="tag tag-${category}">${categoryLabels[category]}</span>`;
+  }
+
+  // ── Checkbox SVG ──────────────────────────────────────────────────────────
+  const checkSVG = `<svg width="9" height="7" viewBox="0 0 9 7" fill="none">
+    <path d="M1 3.5L3.5 6L8 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>`;
+
+  // ── Render ────────────────────────────────────────────────────────────────
+  function render() {
+    const filtered = activeFilter === 'all'
+      ? tasks
+      : tasks.filter(t => t.category === activeFilter);
+
+    const todos = filtered.filter(t => !t.done);
+    const dones = filtered.filter(t =>  t.done);
+
+    // To Do list
+    const todoList = document.getElementById('todo-list');
+    if (todos.length === 0) {
+      todoList.innerHTML = '<div class="empty">No tasks here!</div>';
+    } else {
+      todoList.innerHTML = todos.map(t => `
+        <div class="task-item" data-id="${t.id}">
+          <div class="task-left">
+            <div class="checkbox" data-id="${t.id}">${checkSVG}</div>
+            <span class="task-text">${escapeHTML(t.text)}</span>
+          </div>
+          ${tagHTML(t.category)}
+        </div>
+      `).join('');
+    }
+
+    // Done list
+    const doneList = document.getElementById('done-list');
+    if (dones.length === 0) {
+      doneList.innerHTML = '<div class="empty">Nothing completed yet.</div>';
+    } else {
+      doneList.innerHTML = dones.map(t => `
+        <div class="task-item completed" data-id="${t.id}">
+          <div class="task-left">
+            <div class="checkbox checked" data-id="${t.id}">${checkSVG}</div>
+            <span class="task-text strikethrough">${escapeHTML(t.text)}</span>
+          </div>
+          ${tagHTML(t.category)}
+        </div>
+      `).join('');
+    }
+
+    // Counts (always reflect total, not filtered, for the badge)
+    const allTodos = tasks.filter(t => !t.done);
+    const allDones = tasks.filter(t =>  t.done);
+    document.getElementById('todo-count').textContent = todos.length;
+    document.getElementById('done-count').textContent = dones.length;
+    document.getElementById('tasks-remaining').textContent =
+      `${allTodos.length} task${allTodos.length !== 1 ? 's' : ''} remaining`;
+  }
+
+  function escapeHTML(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  // ── Toggle ────────────────────────────────────────────────────────────────
+  function toggleTask(id) {
+    const task = tasks.find(t => t.id === id);
+    if (task) task.done = !task.done;
+    render();
+  }
+
+  // ── Add Task ──────────────────────────────────────────────────────────────
+  function addTask() {
+    const input = document.getElementById('task-input');
+    const text = input.value.trim();
+    if (!text) return;
+    const category = document.getElementById('category-select').value;
+    tasks.unshift({ id: nextId++, text, category, done: false });
+    input.value = '';
+    render();
+  }
+
+  // ── Events ────────────────────────────────────────────────────────────────
+  document.getElementById('add-btn').addEventListener('click', addTask);
+
+  document.getElementById('task-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter' || (e.metaKey && e.key === 'n')) {
+      e.preventDefault();
+      addTask();
+    }
+  });
+
+  // ⌘N shortcut from anywhere
+  document.addEventListener('keydown', e => {
+    if (e.metaKey && e.key === 'n') {
+      e.preventDefault();
+      document.getElementById('task-input').focus();
+    }
+  });
+
+  // Tab clicks
+  document.getElementById('tab-bar').addEventListener('click', e => {
+    const tab = e.target.closest('[data-filter]');
+    if (!tab) return;
+    activeFilter = tab.dataset.filter;
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    render();
+  });
+
+  // Checkbox clicks (delegated)
+  document.addEventListener('click', e => {
+    const checkbox = e.target.closest('.checkbox[data-id]');
+    if (!checkbox) return;
+    toggleTask(Number(checkbox.dataset.id));
+  });
+
+  // ── Init ──────────────────────────────────────────────────────────────────
+  initHeader();
+  render();
+</script>
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Memorisely – Sign In</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0a4a70;
+    }
+
+    /* Mobile frame */
+    .phone {
+      width: 390px;
+      min-height: 844px;
+      background: linear-gradient(180deg, #0e5a87 0%, #115f87 100%);
+      position: relative;
+      overflow: hidden;
+      border-radius: 40px;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.08);
+    }
+
+    /* ── Top section ── */
+    .top {
+      padding-top: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .badge-wrap {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      margin-bottom: 0;
+    }
+
+    .badge-wrap img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .badge-letter {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      font-weight: 700;
+      color: #fff;
+      pointer-events: none;
+    }
+
+    .welcome {
+      margin-top: 16px;
+      font-size: 28px;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: -0.3px;
+    }
+
+    .sub {
+      margin-top: 8px;
+      font-size: 14px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* ── Card ── */
+    .card {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 560px;
+      background: #fff;
+      border-radius: 32px 32px 0 0;
+      box-shadow: 0 -8px 32px rgba(0,0,0,0.15);
+      padding: 36px 28px 0;
+      overflow: hidden;
+    }
+
+    .card-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #1b2232;
+      margin-bottom: 28px;
+    }
+
+    .field-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: #445067;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .field-input {
+      width: 100%;
+      height: 52px;
+      background: #f3f5f9;
+      border: 1px solid #dbe0e9;
+      border-radius: 12px;
+      padding: 0 15px;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 400;
+      color: #1b2232;
+      outline: none;
+      transition: border-color 0.18s, box-shadow 0.18s;
+      -webkit-appearance: none;
+    }
+
+    .field-input::placeholder {
+      color: #667389;
+    }
+
+    .field-input:focus {
+      border-color: #1e88e5;
+      box-shadow: 0 0 0 3px rgba(30,136,229,0.12);
+    }
+
+    .field-group {
+      margin-bottom: 16px;
+    }
+
+    .forgot-row {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 20px;
+    }
+
+    .forgot {
+      font-size: 13px;
+      font-weight: 500;
+      color: #1e88e5;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .forgot:hover { text-decoration: underline; }
+
+    .btn-signin {
+      width: 100%;
+      height: 56px;
+      background: #8e9bb0;
+      opacity: 0.92;
+      border: none;
+      border-radius: 14px;
+      box-shadow: 0 8px 20px rgba(30,136,229,0.35);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      cursor: pointer;
+      transition: opacity 0.18s, transform 0.12s;
+      margin-bottom: 20px;
+    }
+
+    .btn-signin:hover  { opacity: 0.92; }
+    .btn-signin:active { transform: scale(0.985); }
+
+    /* OR divider */
+    .or-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .or-line {
+      flex: 1;
+      height: 1px;
+      background: #dbe0e9;
+    }
+
+    .or-text {
+      font-size: 13px;
+      font-weight: 400;
+      color: #8e9bb0;
+    }
+
+    /* Social buttons */
+    .social-row {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .btn-social {
+      flex: 1;
+      height: 50px;
+      background: #fff;
+      border: 1.5px solid #d1d7e1;
+      border-radius: 12px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #445067;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .btn-social:hover {
+      background: #f8f9fb;
+      border-color: #b5bfcc;
+    }
+
+    .btn-social .icon {
+      font-size: 16px;
+      line-height: 1;
+    }
+
+    /* Footer */
+    .signup-row {
+      text-align: center;
+      font-size: 14px;
+      font-weight: 400;
+      color: #8e9bb0;
+    }
+
+    .signup-row a {
+      color: #1e88e5;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .signup-row a:hover { text-decoration: underline; }
+
+    /* Home indicator */
+    .home-indicator {
+      width: 134px;
+      height: 5px;
+      background: #c7ccd6;
+      border-radius: 3px;
+      margin: 16px auto 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="phone">
+
+    <!-- Top header -->
+    <div class="top">
+      <div class="badge-wrap">
+        <img src="https://www.figma.com/api/mcp/asset/48738d29-81cd-4847-808d-708398738f0b" alt="App Icon" />
+        <span class="badge-letter">M</span>
+      </div>
+      <p class="welcome">Welcome Back</p>
+      <p class="sub">Sign in to continue</p>
+    </div>
+
+    <!-- Login card -->
+    <div class="card">
+      <p class="card-title">Sign in to your account</p>
+
+      <div class="field-group">
+        <label class="field-label" for="email">Email Address</label>
+        <input class="field-input" id="email" type="email" placeholder="you@example.com" autocomplete="email" />
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="password">Password</label>
+        <input class="field-input" id="password" type="password" placeholder="••••••••" autocomplete="current-password" />
+      </div>
+
+      <div class="forgot-row">
+        <a class="forgot" href="#">Forgot Password?</a>
+      </div>
+
+      <button class="btn-signin" type="button">Sign In</button>
+
+      <div class="or-row">
+        <div class="or-line"></div>
+        <span class="or-text">OR</span>
+        <div class="or-line"></div>
+      </div>
+
+      <div class="social-row">
+        <button class="btn-social" type="button">
+          <span class="icon">G</span> Google
+        </button>
+        <button class="btn-social" type="button">
+          <span class="icon">&#63743;</span> Apple
+        </button>
+      </div>
+
+      <p class="signup-row">Don't have an account? &nbsp;<a href="#">Sign Up</a></p>
+
+      <div class="home-indicator"></div>
+    </div>
+
+  </div>
+</body>
+</html>
