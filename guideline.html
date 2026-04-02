@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>廣告素材 - 國泰世華銀行</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #fafafa;
+      font-family: 'Inter', 'Noto Sans JP', sans-serif;
+      min-height: 100vh;
+    }
+
+    /* ── NavBar ── */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 64px;
+      background: #ffffff;
+      box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      z-index: 100;
+    }
+
+    .navbar-logo img {
+      height: 31px;
+      width: 170px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .navbar-right {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .home-icon {
+      width: 20px;
+      height: 20px;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .home-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .tab-list {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 8px;
+      height: 64px;
+    }
+
+    .tab {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 8px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      white-space: nowrap;
+    }
+
+    .tab span {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 24px;
+      color: #737373;
+    }
+
+    .tab.active {
+      border-bottom-color: #00994e;
+      padding-bottom: 6px;
+      padding-top: 4px;
+    }
+
+    .tab.active span {
+      color: #00994e;
+    }
+
+    /* ── Body ── */
+    .body {
+      padding-top: 68px;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    /* ── SubNavBar ── */
+    .sub-navbar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      height: 68px;
+    }
+
+    .sub-nav-btn {
+      height: 36px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: 1px solid #eee;
+      background: #fafafa;
+      box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+    }
+
+    .sub-nav-btn span {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 24px;
+      color: #0a0a0a;
+    }
+
+    .sub-nav-btn.active {
+      background: #00994e;
+      border-color: #00994e;
+      box-shadow: none;
+    }
+
+    .sub-nav-btn.active span {
+      color: #fafafa;
+    }
+
+    /* ── Container ── */
+    .content-container {
+      background: #ffffff;
+      border-radius: 6px;
+      box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.1), 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+    }
+
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .section:last-child {
+      margin-bottom: 0;
+    }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 32px;
+      color: #00994e;
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+      color: #0a0a0a;
+      margin-bottom: 16px;
+    }
+
+    .section-path {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+      color: #6a7282;
+      margin-bottom: 8px;
+    }
+
+    .section-path:last-child {
+      margin-bottom: 0;
+    }
+
+    .divider {
+      height: 1px;
+      background: #eee;
+      margin: 33px 0 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NavBar -->
+  <nav class="navbar">
+    <a class="navbar-logo" href="#">
+      <img
+        src="https://www.figma.com/api/mcp/asset/da556f67-bbfc-4460-b91e-2b86b8834f80"
+        alt="國泰世華銀行"
+      />
+    </a>
+    <div class="navbar-right">
+      <a href="#" class="home-icon" aria-label="首頁">
+        <img
+          src="https://www.figma.com/api/mcp/asset/020e2445-2c4a-4f6f-84c7-acda503bcacb"
+          alt=""
+        />
+      </a>
+      <div class="tab-list">
+        <div class="tab active"><span>官網</span></div>
+        <div class="tab"><span>電子報</span></div>
+        <div class="tab"><span>CUBE網銀</span></div>
+        <div class="tab"><span>CUBE APP</span></div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Body -->
+  <div class="body">
+
+    <!-- SubNavBar -->
+    <div class="sub-navbar">
+      <button class="sub-nav-btn active"><span>廣告素材</span></button>
+      <button class="sub-nav-btn"><span>製圖規範</span></button>
+      <button class="sub-nav-btn"><span>頁面規範</span></button>
+      <button class="sub-nav-btn"><span>元件庫</span></button>
+      <button class="sub-nav-btn"><span>CMS官網元件</span></button>
+      <button class="sub-nav-btn"><span>CMS行銷公版元件</span></button>
+    </div>
+
+    <!-- Content -->
+    <div class="content-container">
+
+      <!-- Section 1 -->
+      <div class="section">
+        <h2 class="section-title">設計廠商彙整名單</h2>
+        <p class="section-desc">請於下方路徑查找專案合適的廠商</p>
+        <p class="section-path">知識館/廣告部/業務資訊/設計年度廠商/2026-2028年度設計廠商</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Section 2 -->
+      <div class="section">
+        <h2 class="section-title">品牌圖庫素材</h2>
+        <p class="section-desc">請於下方路徑查找合適的插圖或照片</p>
+        <p class="section-path">\\Pfdepnas05\國泰世華銀行品牌圖庫\【照片圖庫】</p>
+        <p class="section-path">\\Pfdepnas05\國泰世華銀行品牌圖庫\【插畫圖庫】</p>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
